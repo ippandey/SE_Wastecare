@@ -25,7 +25,7 @@ const PickupRequest = () => {
     // Handle form submission
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/request-collection",
+        "https://se-wastecare.onrender.com/api/request-collection",
         formData
       );
       alert(response.data.message); // Show success message
