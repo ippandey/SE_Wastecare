@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GoArrowRight } from "react-icons/go";
 import { IoCloseSharp } from "react-icons/io5";
@@ -8,49 +8,71 @@ import blogpic3 from "../assets/blogpic3.png";
 import blogpic4 from "../assets/blogpic4.png";
 import blogpic5 from "../assets/blogpic5.png";
 import blogpic6 from "../assets/blogpic6.png";
+
 const blogData = [
   {
     title:
       "The Importance of Regular Garbage Collection for a Healthier Society",
     description:
-      "Garbage collection is not just about keeping streets clean. It directly impacts public health, environmental safety, and the overall quality of life. Regular and professional waste management prevents diseases, promotes recycling, and maintains the aesthetic beauty of our neighborhoods. At Sanchita Enterprises, we ensure that your waste is handled responsibly, contributing towards a cleaner, greener tomorrow. Don't let unmanaged waste harm your surroundings—choose timely pickups today!",
+      "Garbage collection is not just about keeping streets clean. It directly impacts public health...",
     image: blogpic1,
   },
   {
     title: "How to Prepare Your Waste for Easy and Quick Pickup",
     description:
-      "Preparing your waste correctly makes a huge difference. Always segregate wet and dry waste, use strong garbage bags, and avoid overfilling bins. Label hazardous or electronic waste separately. This not only ensures faster collection but also protects our workers and enables better recycling processes. Trust Sanchita Enterprises to handle your waste efficiently—your little steps lead to bigger change!",
+      "Preparing your waste correctly makes a huge difference. Always segregate wet and dry waste...",
     image: blogpic2,
   },
   {
     title: "The Environmental Benefits of Professional Waste Disposal",
     description:
-      "Improper disposal of garbage results in soil contamination, air pollution, and harmful greenhouse gas emissions. By choosing professional services like Sanchita Enterprises, you ensure that waste is disposed of or recycled following eco-friendly methods. Together, we help reduce landfill overflow, promote sustainable living, and fight climate change. Every waste pickup with us is a step towards a healthier Earth!",
+      "Improper disposal of garbage results in soil contamination, air pollution, and harmful greenhouse gas emissions...",
     image: blogpic3,
   },
   {
     title: "Why Timely Garbage Pickup Matters for Businesses",
     description:
-      "Businesses generate significant amounts of waste daily. A delayed pickup can lead to unpleasant odors, pest problems, and an unhygienic environment, harming your reputation. Scheduled and timely waste collection keeps your workplace clean and your clients happy. Partner with Sanchita Enterprises for professional, on-time waste management services designed to meet your commercial needs!",
+      "Businesses generate significant amounts of waste daily. A delayed pickup can lead to unpleasant odors...",
     image: blogpic4,
   },
   {
     title: "Understanding Waste Segregation: A Beginner’s Guide",
     description:
-      "Waste segregation is the first step toward efficient waste management. Separate biodegradable (food waste) and non-biodegradable (plastic, metal) materials, and keep e-waste in a different container. Not only does it make recycling easier, but it also reduces the amount of waste that ends up in landfills. At Sanchita Enterprises, we encourage and support our customers in practicing waste segregation for a better future.",
+      "Waste segregation is the first step toward efficient waste management...",
     image: blogpic5,
   },
   {
     title:
       "How Sanchita Enterprises is Revolutionizing Waste Management Services",
     description:
-      "At Sanchita Enterprises, we are not just collecting garbage; we are redefining waste management with technology, transparency, and efficiency. From instant online bookings to reliable pickups and environmentally responsible disposal methods, we ensure a seamless experience for our customers. Join our mission to create a cleaner city—one pickup at a time!",
+      "At Sanchita Enterprises, we are not just collecting garbage; we are redefining waste management...",
     image: blogpic6,
   },
 ];
 
+// ✨ BlogLoader Component
+const BlogLoader = () => {
+  return (
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-6 animate-pulse">
+      <div className="h-48 w-full rounded-lg bg-green-300 mb-4"></div>
+      <div className="h-6 w-3/4 rounded-lg bg-green-400 mb-2"></div>
+      <div className="h-6 w-1/2 rounded-lg bg-green-400"></div>
+    </div>
+  );
+};
+
 const Blogs = () => {
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time (e.g., 2 seconds)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="font-work py-20 px-4 md:px-20 bg-gray-50 relative">
@@ -64,30 +86,34 @@ const Blogs = () => {
         Our Latest Blog Posts
       </motion.h1>
 
-      {/* Blog Cards */}
+      {/* Blog Cards or Loaders */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {blogData.map((blog, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow"
-            onClick={() => setSelectedBlog(blog)}
-          >
-            <img
-              src={blog.image}
-              alt={blog.title}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-3">{blog.title}</h2>
-              <div className="flex justify-end text-primary text-2xl">
-                <GoArrowRight />
-              </div>
-            </div>
-          </motion.div>
-        ))}
+        {loading
+          ? Array(6)
+              .fill(0)
+              .map((_, idx) => <BlogLoader key={idx} />)
+          : blogData.map((blog, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer hover:shadow-2xl transition-shadow"
+                onClick={() => setSelectedBlog(blog)}
+              >
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h2 className="text-xl font-semibold mb-3">{blog.title}</h2>
+                  <div className="flex justify-end text-primary text-2xl">
+                    <GoArrowRight />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
       </div>
 
       {/* Fullscreen Blog Popup */}
