@@ -6,8 +6,8 @@ import blogpic1 from "../assets/blogpic1.png";
 import blogpic2 from "../assets/blogpic2.png";
 import blogpic3 from "../assets/blogpic3.png";
 import blogpic4 from "../assets/blogpic4.png";
-// import blogpic5 from "../assets/blogpic5.png";
-
+import blogpic5 from "../assets/blogpic5.png";
+import blogpic6 from "../assets/blogpic6.png";
 const blogData = [
   {
     title:
@@ -38,16 +38,14 @@ const blogData = [
     title: "Understanding Waste Segregation: A Beginner’s Guide",
     description:
       "Waste segregation is the first step toward efficient waste management. Separate biodegradable (food waste) and non-biodegradable (plastic, metal) materials, and keep e-waste in a different container. Not only does it make recycling easier, but it also reduces the amount of waste that ends up in landfills. At Sanchita Enterprises, we encourage and support our customers in practicing waste segregation for a better future.",
-    image:
-      "https://images.unsplash.com/photo-1583337130417-3346a1a4a543?auto=format&fit=crop&w=800&q=60",
+    image: blogpic5,
   },
   {
     title:
       "How Sanchita Enterprises is Revolutionizing Waste Management Services",
     description:
       "At Sanchita Enterprises, we are not just collecting garbage; we are redefining waste management with technology, transparency, and efficiency. From instant online bookings to reliable pickups and environmentally responsible disposal methods, we ensure a seamless experience for our customers. Join our mission to create a cleaner city—one pickup at a time!",
-    image:
-      "https://images.unsplash.com/photo-1593164842238-0c42d07d1e5a?auto=format&fit=crop&w=800&q=60",
+    image: blogpic6,
   },
 ];
 
