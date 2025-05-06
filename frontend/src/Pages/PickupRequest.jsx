@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import FormLoader from "../Components/Loader/FormLoader";
 
 const PickupRequest = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -21,6 +26,7 @@ const PickupRequest = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // Handle form submission
     try {
@@ -28,7 +34,7 @@ const PickupRequest = () => {
         "https://se-wastecare.onrender.com/api/request-collection",
         formData
       );
-      alert(response.data.message); // Show success message
+
       setFormData({
         name: "",
         address: "",
@@ -39,13 +45,23 @@ const PickupRequest = () => {
         pickupTime: "",
         specialInstructions: "",
       });
+
+      setLoading(false);
+
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        navigate("/success");
+      }, 500); // Show loader at least for half a second
     } catch (error) {
+      setLoading(false);
       alert("Error submitting the form. Please try again.");
     }
   };
 
   return (
     <div className="font-work min-h-screen py-20 px-4 md:px-20 bg-gray-50">
+      {loading && <FormLoader />}
+
       {/* Page Title */}
       <motion.h1
         initial={{ opacity: 0, y: -50 }}
@@ -183,6 +199,7 @@ const PickupRequest = () => {
               whileTap={{ scale: 0.95 }}
               type="submit"
               className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-primary-dark transition-all duration-300"
+              disabled={loading}
             >
               Submit Request
             </motion.button>

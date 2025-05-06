@@ -6,6 +6,7 @@ import commercialwaste from "../assets/commercial-waste.png";
 import residentialwaste from "../assets/residential-waste.png";
 import recycling from "../assets/recycling.png";
 import team from "../assets/team.png";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -30,12 +31,14 @@ const HomePage = () => {
             We provide reliable garbage collection, recycling solutions, and
             eco-friendly waste management for a greener tomorrow.
           </motion.p>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            className="mt-4 px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700"
-          >
-            Request Pickup
-          </motion.button>
+          <Link to="/request-pickup">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              className="mt-4 px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700"
+            >
+              Request Pickup
+            </motion.button>
+          </Link>
         </div>
 
         {/* Hero Image */}
